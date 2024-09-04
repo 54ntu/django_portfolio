@@ -9,7 +9,7 @@ class CustomUserManager(UserManager):
         """
         Create and save a user with the given username, email, and password.
         """
-        username= f'{email.split("@")[0]}{randint((1,999))}'
+        username= f'{email.split("@")[0]}{randint(1,999)}'
         if not email:
             raise ValueError("email is not provided....!!!!")
         email = self.normalize_email(email)
@@ -22,6 +22,8 @@ class CustomUserManager(UserManager):
      def create_user(self, email, username=None, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
+        extra_fields.setdefault("is_active", True)
+
         return self._create_user(username, email, password, **extra_fields)
 
      def create_superuser(self, email, username=None, password=None, **extra_fields):
