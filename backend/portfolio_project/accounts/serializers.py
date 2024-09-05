@@ -4,9 +4,11 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class RegisterUserSerializer(serializers.Serializer):
-    email = serializers.EmailField(max_length= 100)
+class RegisterUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length= 100,write_only=True)
+    class Meta:
+         model = User
+         fields = ['email','password']
 
     def validate_email(self,value):
         if User.objects.filter(email= value).exists():

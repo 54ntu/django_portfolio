@@ -24,7 +24,7 @@ class UserViewsets(viewsets.GenericViewSet,mixins.CreateModelMixin):
             username = serializer.validated_data['email'],
             password = serializer.validated_data['password']
 
-        )
+        ) 
 
         if user is not None:
             token,_ = Token.objects.get_or_create(user=user)
